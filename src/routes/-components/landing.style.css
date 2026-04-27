@@ -60,6 +60,8 @@ nav {
   align-items: center;
   justify-content: space-between;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(250, 249, 247, 0.8);
+  backdrop-filter: blur(12px) saturate(180%);
 }
 nav.scrolled {
   background: rgba(250, 249, 247, 0.98);

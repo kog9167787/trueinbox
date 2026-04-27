@@ -257,7 +257,7 @@ function TrueInboxLanding() {
                   {/* Payment chip */}
                   <div className="flex justify-center mb-2 mt-1">
                     <div
-                      className="rounded-xl bg-white shadow-sm p-2 border border-stone-200 text-center mx-3"
+                      className="rounded-md bg-white shadow-sm p-2 border border-stone-200 text-center mx-3"
                       style={{ width: 'calc(100% - 24px)' }}
                     >
                       <div className="text-stone-500 text-[11px] flex items-center justify-center gap-1.5">
@@ -274,7 +274,7 @@ function TrueInboxLanding() {
                   {/* Message them (Fan) */}
                   <div className="flex justify-end">
                     <div className="max-w-[85%] flex flex-col gap-0.5 items-end px-3">
-                      <div className="px-3 py-2 rounded-2xl text-[13px] leading-relaxed shadow-sm bg-emerald-600 text-white rounded-br-sm">
+                      <div className="px-3 py-2 rounded-xl text-[13px] leading-relaxed shadow-sm bg-emerald-600 text-white rounded-br-sm">
                         Hey levelsio! Building an AI dev tool and struggling
                         with our GTM strategy for early enterprise pilots.
                       </div>
@@ -286,7 +286,7 @@ function TrueInboxLanding() {
 
                   <div className="flex justify-end">
                     <div className="max-w-[85%] flex flex-col gap-0.5 items-end px-3">
-                      <div className="px-3 py-2 rounded-2xl text-[13px] leading-relaxed shadow-sm bg-emerald-600 text-white rounded-br-sm">
+                      <div className="px-3 py-2 rounded-xl text-[13px] leading-relaxed shadow-sm bg-emerald-600 text-white rounded-br-sm">
                         Should we target individual devs first or go straight to
                         engineering managers? Happy to pay for your thoughts!
                       </div>
