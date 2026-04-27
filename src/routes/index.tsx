@@ -53,7 +53,7 @@ function TrueInboxLanding() {
     <>
       <nav id="nav">
         <a href="#" className="logo">
-          <div className="logo-mark">✓</div>
+          <img src="/logo.png" alt="" className='size-6' />
           TrueInbox
         </a>
         <ul className="nav-links">
@@ -1328,7 +1328,7 @@ function TrueInboxLanding() {
       {/* FOOTER */}
       <footer>
         <a href="#" className="logo">
-          <div className="logo-mark">✓</div>
+          <img src="/logo.png" alt="" className='size-6' />
           TrueInbox
         </a>
         <div className="footer-links">
