@@ -128,7 +128,7 @@ export function Navbar() {
           <div className="flex items-center gap-2.5 cursor-pointer group">
             <Logo size={28} />
             <span className=" font-medium text-foreground text-base group-hover:text-primary transition-colors">
-              TrueInbox
+              Inboxly
             </span>
           </div>
         </Link>
@@ -216,7 +216,7 @@ export function DashboardMockup() {
           <div className="flex items-center gap-1.5">
             <Logo size={16} />
             <span className="text-[10px] font-bold text-foreground ">
-              TrueInbox
+              Inboxly
             </span>
           </div>
           <div className="flex items-center gap-1.5">

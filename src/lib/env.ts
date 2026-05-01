@@ -14,6 +14,7 @@ const envSchema = z.object({
     .string()
     .min(1, 'DODO_PAYMENTS_WEBHOOK_KEY is required'),
   RESEND_API_KEY: z.string().min(1, 'RESEND_API_KEY is required'),
+  DODO_PRODUCT_ID: z.string().min(1, 'DODO_PRODUCT_ID is required'),
 })
 
 export type Env = z.infer<typeof envSchema>

@@ -54,7 +54,7 @@ function TrueInboxLanding() {
       <nav id="nav">
         <a href="#" className="logo">
           <img src="/logo.png" alt="" className='size-6' />
-          TrueInbox
+          Inboxly
         </a>
         <ul className="nav-links">
           <li>
@@ -147,7 +147,7 @@ function TrueInboxLanding() {
               </div>
             </div>
             <p className="hero-sub">
-              TrueInbox keeps messages from close friends, real sponsors, and
+              Inboxly keeps messages from close friends, real sponsors, and
               people who matter always within reach — no fan floods, no bots.
             </p>
             <div className="hero-actions">
@@ -410,7 +410,7 @@ function TrueInboxLanding() {
               <div className="step-num-label">Step 02</div>
               <div className="step-title">You receive it</div>
               <div className="step-desc">
-                The message lands in your TrueInbox — clean, verified, alongside
+                The message lands in your Inboxly — clean, verified, alongside
                 your trusted friends and team.
               </div>
             </div>
@@ -531,7 +531,7 @@ function TrueInboxLanding() {
                     maxWidth: 380,
                   }}
                 >
-                  Your inbox has always been chaos. TrueInbox turns that chaos
+                  Your inbox has always been chaos. Inboxly turns that chaos
                   into a signal-only channel — every message that reaches you
                   has already paid for your time.
                   <br />
@@ -750,7 +750,7 @@ function TrueInboxLanding() {
                     maxWidth: 380,
                   }}
                 >
-                  Your messages have always been lost in the noise. TrueInbox
+                  Your messages have always been lost in the noise. Inboxly
                   gives you a direct line — pay to be seen, or pay for a
                   guaranteed reply.
                   <br />
@@ -909,7 +909,7 @@ function TrueInboxLanding() {
           <div className="reveal text-center">
             <div className="label">The difference</div>
             <h2 className="section-title">
-              Before &amp; <em>after TrueInbox.</em>
+              Before &amp; <em>after Inboxly.</em>
             </h2>
           </div>
           <div className="inbox-split reveal">
@@ -997,7 +997,7 @@ function TrueInboxLanding() {
                   className="panel-dot"
                   style={{ background: 'var(--accent)' }}
                 />
-                Your TrueInbox ✓
+                Your Inboxly ✓
               </div>
               <div className="inbox-row">
                 <div className="row-av" style={{ background: '#e8f5ef' }}>
@@ -1085,7 +1085,7 @@ function TrueInboxLanding() {
             <div className="econ-box highlight">
               <div className="econ-emoji">📨</div>
               <div className="econ-label">Lands in</div>
-              <div className="econ-val">Your TrueInbox</div>
+              <div className="econ-val">Your Inboxly</div>
             </div>
             <div className="econ-arrow">→</div>
             <div className="econ-box">
@@ -1116,7 +1116,7 @@ function TrueInboxLanding() {
           <div className="feat-grid reveal">
             <div className="feat-card">
               <div className="feat-icon">💬</div>
-              <div className="feat-title">TrueInbox</div>
+              <div className="feat-title">Inboxly</div>
               <div className="feat-desc">
                 A clean inbox reserved for verified sponsors and your trusted
                 circle. Fan messages and bots simply can't enter.
@@ -1179,7 +1179,7 @@ function TrueInboxLanding() {
             <div className="testi-card">
               <div className="testi-stars">★ ★ ★ ★ ★</div>
               <div className="testi-text">
-                "I missed a $30K Nike deal buried under 4,000 fan DMs. TrueInbox
+                "I missed a $30K Nike deal buried under 4,000 fan DMs. Inboxly
                 would have surfaced it the same day."
               </div>
               <div className="testi-author">
@@ -1258,7 +1258,7 @@ function TrueInboxLanding() {
               <div className="price-amount">$0</div>
               <div className="price-period">forever free</div>
               <ul className="price-features">
-                <li>TrueInbox access</li>
+                <li>Inboxly access</li>
                 <li>Up to 20 trusted contacts</li>
                 <li>Basic deal analytics</li>
                 <li>2 platforms connected</li>
@@ -1329,7 +1329,7 @@ function TrueInboxLanding() {
       <footer>
         <a href="#" className="logo">
           <img src="/logo.png" alt="" className='size-6' />
-          TrueInbox
+          Inboxly
         </a>
         <div className="footer-links">
           <a href="#">Privacy</a>
@@ -1338,7 +1338,7 @@ function TrueInboxLanding() {
           <a href="#">Blog</a>
           <a href="#">Twitter</a>
         </div>
-        <div className="footer-copy">© 2025 TrueInbox. Built for creators.</div>
+        <div className="footer-copy">© 2025 Inboxly. Built for creators.</div>
       </footer>
     </>
   )

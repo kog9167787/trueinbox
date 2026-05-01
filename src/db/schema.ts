@@ -264,7 +264,7 @@ export const verification = mySchema.table('verification', {
 })
 
 // Creator balance - tracks earnings for each creator
-// Money is held in TrueInbox's account, this tracks what each creator is owed
+// Money is held in Inboxly's account, this tracks what each creator is owed
 export const creatorBalance = mySchema.table('creator_balance', {
   id: t.text('id').primaryKey(),
   userId: t

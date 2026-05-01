@@ -234,7 +234,7 @@ export function Navbar() {
           <div className="flex items-center gap-2 cursor-pointer group flex-shrink-0">
             <Logo size={26} />
             <span className=" font-bold text-foreground text-base hidden sm:block group-hover:text-primary transition-colors">
-              TrueInbox
+              Inboxly
             </span>
           </div>
         </Link>

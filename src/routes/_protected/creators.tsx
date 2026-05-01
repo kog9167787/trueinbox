@@ -287,7 +287,7 @@ function Creators() {
               </DialogTitle>
               <DialogDescription>
                 Invite your favorite creators, influencers, or celebrities to
-                TrueInbox. Share this link with them to get their attention!
+                Inboxly. Share this link with them to get their attention!
               </DialogDescription>
             </DialogHeader>
 

@@ -1,8 +1,8 @@
 # Project Context for Future Agents
 
-## Product Summary: TrueInbox
+## Product Summary: Inboxly
 
-**TrueInbox** is a communication management platform for creators and sponsors. The core idea is to give creators a "clean inbox" where only verified sponsors, close friends, and important contacts can reach them—reducing noise from fan floods, bots, and spam.
+**Inboxly** is a communication management platform for creators and sponsors. The core idea is to give creators a "clean inbox" where only verified sponsors, close friends, and important contacts can reach them—reducing noise from fan floods, bots, and spam.
 
 ### Key Features and Product Value
 
@@ -13,7 +13,7 @@
   - Advanced analytics and multi-platform unification (Instagram, X, YouTube, etc).
 
 - **For Sponsors/Fans:**
-  - Pay for guaranteed visibility and reply — messages go directly to the creator’s TrueInbox.
+  - Pay for guaranteed visibility and reply — messages go directly to the creator’s Inboxly.
   - Refundable fee if the creator replies, otherwise funds go to the creator, discouraging spam and unserious outreach.
 
 ### Major Value Props
@@ -26,7 +26,7 @@
 
 1. **Sponsor Pays to DM:**
    - Sponsor places a small, refundable deposit for messaging a creator (e.g., $25).
-   - Message lands in creator’s TrueInbox.
+   - Message lands in creator’s Inboxly.
    - If replied: Sponsor is refunded. If not: Creator keeps the deposit.
 2. **Inbox Filtering:**
    - Only sponsors who pay, trusted contacts, or team/friends make it through. Others are filtered as spam.
@@ -66,4 +66,4 @@
 
 ---
 
-This summary is intended to give any future agents a concise but thorough understanding of what TrueInbox is and how the codebase is structured and operated. For deeper details, refer to AGENTS.md and inline comments in the codebase.
+This summary is intended to give any future agents a concise but thorough understanding of what Inboxly is and how the codebase is structured and operated. For deeper details, refer to AGENTS.md and inline comments in the codebase.

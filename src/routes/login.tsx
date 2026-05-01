@@ -84,7 +84,7 @@ function SignIn() {
             <div className="inline-flex items-center gap-2.5 cursor-pointer mb-6 group">
               <Logo size={30} />
               <span className=" font-bold text-foreground text-xl group-hover:text-primary transition-colors">
-                TrueInbox
+                Inboxly
               </span>
             </div>
           </a>

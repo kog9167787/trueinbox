@@ -153,11 +153,11 @@ export const Route = createFileRoute('/api/checkout')({
                 },
                 customer: {
                   email: session.user.email,
-                  name: session.user.name || 'TrueInbox User',
+                  name: session.user.name || 'Inboxly User',
                 },
                 product_cart: [
                   {
-                    product_id: `pdt_0NcaBSeeRfNZQccto9nA2`,
+                    product_id: env.DODO_PRODUCT_ID,
                     quantity: 1,
                     amount: priceInCents,
                   },

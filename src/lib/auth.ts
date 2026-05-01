@@ -31,7 +31,7 @@ export const auth = betterAuth({
         const a = await resend.emails.send({
           from: 'login@syncmate.xyz',
           to: email,
-          subject: 'Sign in to TrueInbox',
+          subject: 'Sign in to Inboxly',
           html: `<p>Click the link below to sign in to your account:</p><p><a href="${url}">${url}</a></p>`,
         })
         console.log(a);

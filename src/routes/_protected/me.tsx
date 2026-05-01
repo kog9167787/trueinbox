@@ -1255,7 +1255,7 @@ function ProfileSettings() {
               Delete account
             </p>
             <p className="text-xs text-red-500 mb-4 leading-relaxed">
-              Permanently delete your TrueInbox profile and all associated data.
+              Permanently delete your Inboxly profile and all associated data.
               This cannot be undone.
             </p>
             <button className="text-xs font-semibold text-red-600 border border-red-300 bg-white hover:bg-red-50 px-4 py-2 rounded-lg transition-colors">

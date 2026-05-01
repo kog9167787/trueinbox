@@ -44,14 +44,14 @@ function Onboarding() {
           <div className="inline-flex items-center gap-2 mb-5">
             <Logo size={28} />
             <span className=" font-bold text-foreground text-xl">
-              TrueInbox
+              Inboxly
             </span>
           </div>
           <h1 className=" text-2xl font-bold text-foreground">
             What's your name?
           </h1>
           <p className="text-muted-foreground text-sm mt-2">
-            This is how you'll appear to others on TrueInbox.
+            This is how you'll appear to others on Inboxly.
           </p>
         </div>
 

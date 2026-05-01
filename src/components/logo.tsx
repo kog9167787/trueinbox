@@ -24,7 +24,7 @@ export function LogoWithText({ size = 28, className = '' }: LogoProps) {
         className=" font-bold text-foreground"
         style={{ fontSize: size * 0.6, lineHeight: 1 }}
       >
-        TrueInbox
+        Inboxly
       </span>
     </div>
   )
