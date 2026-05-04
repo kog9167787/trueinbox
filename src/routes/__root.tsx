@@ -27,7 +27,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       
       { name: 'twitter:title', content: "loaderData.post.title" },
       { name: 'twitter:description', content: "loaderData.post.excerpt" },
-      { name: 'twitter:image', content: "https://www.inboxly.live" }
+      { name: 'twitter:image', content: "https://www.inboxly.live" },
       {
         charSet: 'utf-8',
       },
