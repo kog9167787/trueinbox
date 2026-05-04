@@ -8,7 +8,7 @@ import appCss from '../styles.css?url'
 
 import { QueryClientProvider } from '@tanstack/react-query'
 import type { QueryClient } from '@tanstack/react-query'
-import { seo } from '#/lib/utils'
+// import { seo } from '#/lib/utils'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -18,12 +18,16 @@ interface MyRouterContext {
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
     meta: [
-      ...seo({
-        title:
-          "Inboxly",
-        image: `https://www.inboxly.live/image.png`,
-        url: "https://www.inboxly.live",
-      }),
+      // ...seo({
+      //   title:
+      //     "Inboxly",
+      //   image: `https://www.inboxly.live/image.png`,
+      //   url: "https://www.inboxly.live",
+      // }),
+      
+      { name: 'twitter:title', content: "loaderData.post.title" },
+      { name: 'twitter:description', content: "loaderData.post.excerpt" },
+      { name: 'twitter:image', content: "https://www.inboxly.live" }
       {
         charSet: 'utf-8',
       },
