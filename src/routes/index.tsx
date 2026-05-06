@@ -63,9 +63,9 @@ function TrueInboxLanding() {
           <li>
             <a href="#features">Features</a>
           </li>
-          <li>
+          {/* <li>
             <a href="#pricing">Pricing</a>
-          </li>
+          </li> */}
         </ul>
         <a href="/dashboard">
           <button className="nav-cta">Dashboard</button>
@@ -1234,7 +1234,7 @@ function TrueInboxLanding() {
         </div>
       </section>
       {/* PRICING */}
-      <section
+      {/* <section
         id="pricing"
         style={{
           background: 'var(--warm)',
@@ -1303,7 +1303,7 @@ function TrueInboxLanding() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* CTA */}
       <div className="cta-wrap reveal">
         <div className="cta-box">
