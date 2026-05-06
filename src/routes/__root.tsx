@@ -21,7 +21,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       ...seo({
         title:
           "Inboxly",
-        image: `https://www.inboxly.live/image.png`,
+        image: `https://www.inboxly.live/og-image.png`,
         url: "https://www.inboxly.live",
       }),
       {
