@@ -55,8 +55,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           defer
           data-website-id="69f4d3af0026f9e90737"
           data-domain="inboxly.live"
-          src="https://www.insightly.live/script.js">
-        </script>
+          src="https://www.insightly.live/script.js"
+        />
       </head>
       <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
         <QueryClientProvider client={Route.useRouteContext().queryClient}>
