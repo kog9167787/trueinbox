@@ -28,9 +28,10 @@ export const seo = ({
     { name: "twitter:description", content: description },
     { name: "twitter:image:type", content: "image/png" },
     { name: "twitter:image:width", content: "1200" },
-    { name: "twitter:image:height", content: "630" },
+    { name: "twitter:image:height", content: "628" },
     { name: "twitter:image", content: image },
     { name: "twitter:creator", content: "@insightly" },
+    { name: "twitter:site", content: "@sahil_builds" },   // or your actual handle
     { name: "twitter:site", content: "@insightly" },
     { property: "og:type", content: "website" },
     { property: "og:title", content: title },
@@ -42,7 +43,7 @@ export const seo = ({
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
         { property: "og:image:type", content: "image/png" },
-        { property: "og:site_name", content: "Insightly" },
+        { property: "og:site_name", content: "Inboxly" },
       ]
       : []),
   ];
