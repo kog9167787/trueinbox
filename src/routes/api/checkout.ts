@@ -119,12 +119,12 @@ export const Route = createFileRoute('/api/checkout')({
           }
         }
 
-        // if (priceInDollars <= 0) {
-        //   return Response.json(
-        //     { message: 'This creator does not charge for this type of DM' },
-        //     { status: 400 },
-        //   )
-        // }
+        if (priceInDollars <= 0) {
+          return Response.json(
+            { message: 'This creator does not charge for this type of DM' },
+            { status: 400 },
+          )
+        }
 
         const priceInCents = Math.round(priceInDollars * 100)
         let paymentId = null
