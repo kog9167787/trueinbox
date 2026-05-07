@@ -91,6 +91,7 @@ const nichesDisplay = [
   'Sports',
   'Photography',
   'Business',
+  'Softwares and IoT',
   'Other',
 ]
 
@@ -523,7 +524,7 @@ function ProfileSettings() {
               placeholder="yourhandle"
             />
             <p className="text-xs text-stone-400 mt-1.5">
-              trueinbox.com/
+              inboxly.com/
               <span className="text-emerald-700 font-medium">
                 {form.username || 'yourhandle'}
               </span>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useSession } from '../../lib/auth-client'
 import { api } from '../../lib/api'
 import type { Stats, UnreadConversation } from '../../lib/api'
@@ -11,6 +11,8 @@ import {
   Inbox,
   TrendingUp,
   Sparkles,
+  AlertCircle,
+  Settings,
 } from 'lucide-react'
 import { Card } from '#/components/ui/card'
 
@@ -86,6 +88,7 @@ function StatCard({
 
 function Dashboard() {
   const { data: session } = useSession()
+  const navigate = useNavigate()
   const [stats, setStats] = useState<Stats | null>(null)
   const [unread, setUnread] = useState<UnreadConversation[]>([])
   const [loading, setLoading] = useState(true)
@@ -102,8 +105,43 @@ function Dashboard() {
   const displayName =
     session?.user.name.split(' ')[0] || session?.user.email.split('@')[0]
 
+  // Check if user has set their prices
+  const hasPrices =
+    (session?.user.dmPrice ?? 0) > 0 ||
+    (session?.user.guaranteedReplyPrice ?? 0) > 0
+
   return (
     <div className="w-full pt-14">
+      {/* Onboarding Alert - Show if prices not set */}
+      {!loading && !hasPrices && (
+        <div className="mb-6 animate-fade-up">
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-5 shadow-sm">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-amber-100 border border-amber-200 flex items-center justify-center flex-shrink-0">
+                <AlertCircle className="w-5 h-5 text-amber-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm font-semibold text-amber-900 mb-1">
+                  Complete Your Profile Setup
+                </h3>
+                <p className="text-xs text-amber-700 mb-3 leading-relaxed">
+                  Set your DM pricing to start earning from your inbox. Choose
+                  your rates and let people pay to reach you directly.
+                </p>
+                <button
+                  onClick={() => navigate({ to: '/me' })}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white text-xs font-semibold rounded-lg hover:bg-amber-700 transition-colors shadow-sm"
+                >
+                  <Settings className="w-3.5 h-3.5" />
+                  Set Up Pricing
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="mb-8 animate-fade-up">
         <div className="flex items-center gap-3 mb-1">

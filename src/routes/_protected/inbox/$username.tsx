@@ -314,7 +314,7 @@ function ChatPage() {
 
             {/* Payment Options */}
             <div className="p-4 space-y-3">
-              {(creator.dmPrice ?? 0) > 0 && (
+              { (
                 <button
                   onClick={() => handlePayment('paywall')}
                   className="w-full flex items-center justify-between px-4 py-3.5 bg-stone-50 border border-stone-200 hover:bg-stone-100 rounded-xl transition text-left"

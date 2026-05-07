@@ -207,7 +207,7 @@ export function DashboardMockup() {
           <div className="w-3 h-3 rounded-full bg-green-400/90" />
           <div className="flex-1 mx-4">
             <div className="bg-background border border-border rounded-md px-3 py-0.5 text-[10px] text-muted-foreground max-w-40 mx-auto text-center">
-              trueinbox.dev
+              inboxly.live
             </div>
           </div>
         </div>

@@ -29,8 +29,8 @@ export function PaymentButtons({
 
   return (
     <div className={`${containerClass} ${className}`}>
-      {/* DM Button */}
-      {hasPaywall && (
+      DM Button
+      {/* {hasPaywall && ( */}
         <button
           onClick={onPaywall}
           className={`flex items-center justify-between px-4 py-3 bg-emerald-100 border border-emerald-400 hover:bg-emerald-200 rounded-xl transition text-left ${layout === 'horizontal' ? 'flex-1' : 'w-full'}`}
@@ -45,7 +45,7 @@ export function PaymentButtons({
             ${dmPrice}
           </span>
         </button>
-      )}
+      {/* )} */}
 
       {/* Guaranteed Reply Button - Premium styling */}
       {hasGuaranteed && (

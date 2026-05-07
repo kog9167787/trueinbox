@@ -23,7 +23,6 @@ import { Route as ApiPingRouteImport } from './routes/api/ping'
 import { Route as ApiPayoutMethodsRouteImport } from './routes/api/payout-methods'
 import { Route as ApiPaymentSettingsRouteImport } from './routes/api/payment-settings'
 import { Route as ApiMeRouteImport } from './routes/api/me'
-import { Route as ApiDevLoginRouteImport } from './routes/api/dev-login'
 import { Route as ApiCreatorsRouteImport } from './routes/api/creators'
 import { Route as ApiConversationsRouteImport } from './routes/api/conversations'
 import { Route as ApiCheckoutRouteImport } from './routes/api/checkout'
@@ -110,11 +109,6 @@ const ApiPaymentSettingsRoute = ApiPaymentSettingsRouteImport.update({
 const ApiMeRoute = ApiMeRouteImport.update({
   id: '/api/me',
   path: '/api/me',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiDevLoginRoute = ApiDevLoginRouteImport.update({
-  id: '/api/dev-login',
-  path: '/api/dev-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiCreatorsRoute = ApiCreatorsRouteImport.update({
@@ -224,7 +218,6 @@ export interface FileRoutesByFullPath {
   '/api/checkout': typeof ApiCheckoutRoute
   '/api/conversations': typeof ApiConversationsRouteWithChildren
   '/api/creators': typeof ApiCreatorsRouteWithChildren
-  '/api/dev-login': typeof ApiDevLoginRoute
   '/api/me': typeof ApiMeRoute
   '/api/payment-settings': typeof ApiPaymentSettingsRoute
   '/api/payout-methods': typeof ApiPayoutMethodsRoute
@@ -257,7 +250,6 @@ export interface FileRoutesByTo {
   '/api/checkout': typeof ApiCheckoutRoute
   '/api/conversations': typeof ApiConversationsRouteWithChildren
   '/api/creators': typeof ApiCreatorsRouteWithChildren
-  '/api/dev-login': typeof ApiDevLoginRoute
   '/api/me': typeof ApiMeRoute
   '/api/payment-settings': typeof ApiPaymentSettingsRoute
   '/api/payout-methods': typeof ApiPayoutMethodsRoute
@@ -293,7 +285,6 @@ export interface FileRoutesById {
   '/api/checkout': typeof ApiCheckoutRoute
   '/api/conversations': typeof ApiConversationsRouteWithChildren
   '/api/creators': typeof ApiCreatorsRouteWithChildren
-  '/api/dev-login': typeof ApiDevLoginRoute
   '/api/me': typeof ApiMeRoute
   '/api/payment-settings': typeof ApiPaymentSettingsRoute
   '/api/payout-methods': typeof ApiPayoutMethodsRoute
@@ -329,7 +320,6 @@ export interface FileRouteTypes {
     | '/api/checkout'
     | '/api/conversations'
     | '/api/creators'
-    | '/api/dev-login'
     | '/api/me'
     | '/api/payment-settings'
     | '/api/payout-methods'
@@ -362,7 +352,6 @@ export interface FileRouteTypes {
     | '/api/checkout'
     | '/api/conversations'
     | '/api/creators'
-    | '/api/dev-login'
     | '/api/me'
     | '/api/payment-settings'
     | '/api/payout-methods'
@@ -397,7 +386,6 @@ export interface FileRouteTypes {
     | '/api/checkout'
     | '/api/conversations'
     | '/api/creators'
-    | '/api/dev-login'
     | '/api/me'
     | '/api/payment-settings'
     | '/api/payout-methods'
@@ -427,7 +415,6 @@ export interface RootRouteChildren {
   ApiCheckoutRoute: typeof ApiCheckoutRoute
   ApiConversationsRoute: typeof ApiConversationsRouteWithChildren
   ApiCreatorsRoute: typeof ApiCreatorsRouteWithChildren
-  ApiDevLoginRoute: typeof ApiDevLoginRoute
   ApiMeRoute: typeof ApiMeRoute
   ApiPaymentSettingsRoute: typeof ApiPaymentSettingsRoute
   ApiPayoutMethodsRoute: typeof ApiPayoutMethodsRoute
@@ -542,13 +529,6 @@ declare module '@tanstack/react-router' {
       path: '/api/me'
       fullPath: '/api/me'
       preLoaderRoute: typeof ApiMeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/dev-login': {
-      id: '/api/dev-login'
-      path: '/api/dev-login'
-      fullPath: '/api/dev-login'
-      preLoaderRoute: typeof ApiDevLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/creators': {
@@ -749,7 +729,6 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCheckoutRoute: ApiCheckoutRoute,
   ApiConversationsRoute: ApiConversationsRouteWithChildren,
   ApiCreatorsRoute: ApiCreatorsRouteWithChildren,
-  ApiDevLoginRoute: ApiDevLoginRoute,
   ApiMeRoute: ApiMeRoute,
   ApiPaymentSettingsRoute: ApiPaymentSettingsRoute,
   ApiPayoutMethodsRoute: ApiPayoutMethodsRoute,
