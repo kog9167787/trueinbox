@@ -1,11 +1,12 @@
 import { betterAuth } from 'better-auth'
 import { tanstackStartCookies } from 'better-auth/tanstack-start'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
-import { magicLink } from 'better-auth/plugins'
+import { customSession, magicLink } from 'better-auth/plugins'
 import { Resend } from 'resend'
 import { db } from '#/db'
 import { env } from './env'
 import * as schema from '#/db/schema.ts'
+import { eq } from 'drizzle-orm'
 const resend = new Resend(env.RESEND_API_KEY)
 
 export const auth = betterAuth({
@@ -38,8 +39,23 @@ export const auth = betterAuth({
 
       },
     }),
-    // tanstackStartCookies(),
-  ],
+    customSession(async ({ user, session }) => {
+      try {
+        const userWithRole = await db.select().from(schema.user).where(eq(schema.user.id, user.id))
+
+        return {
+          user: {
+            ...user,
+            dmPrice: userWithRole?.[0]?.dmPrice,
+            guaranteedReplyPrice: userWithRole?.[0]?.guaranteedReplyPrice
+          },
+          session
+        };
+      } catch (error) {
+        console.error("Failed to get user details", error)
+        throw error
+      }
+    }),],
   socialProviders: {
     google: {
       clientId: env.GOOGLE_CLIENT_ID,
