@@ -59,6 +59,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           data-domain="inboxly.live"
           src="https://www.insightly.live/script.js"
         />
+        <script
+          src="https://cdn.databuddy.cc/databuddy.js"
+          data-client-id="5bfc2d15-55b9-4e89-9c87-14d48cc3b63a"
+          crossOrigin="anonymous"
+          async
+        ></script>
       </head>
       <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
         <QueryClientProvider client={Route.useRouteContext().queryClient}>
