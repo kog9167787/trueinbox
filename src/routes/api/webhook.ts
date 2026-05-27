@@ -60,15 +60,20 @@ export const Route = createFileRoute('/api/webhook')({
 async function handlePaymentSucceeded(data: any) {
   const { payment_id, metadata } = data
 
+  if (!metadata?.payment_id) {
+    console.error('Missing payment_id in metadata')
+    return
+  }
+
   // Find the payment record
   const paymentResult = await db
     .select()
     .from(payment)
-    .where(eq(payment.id, payment_id))
+    .where(eq(payment.id, metadata.payment_id))
   const paymentRecord = paymentResult[0]
 
   if (!paymentRecord) {
-    console.error('Payment record not found:', payment_id)
+    console.error('Payment record not found:', metadata.payment_id)
     return
   }
 
@@ -80,7 +85,7 @@ async function handlePaymentSucceeded(data: any) {
       providerPaymentId: payment_id,
       updatedAt: new Date(),
     })
-    .where(eq(payment.id, payment_id))
+    .where(eq(payment.id, metadata.payment_id))
 
   // Check if this is an upgrade payment
   const isUpgrade = metadata?.is_upgrade === true
@@ -101,10 +106,10 @@ async function handlePaymentSucceeded(data: any) {
   const existingAccess = await db
     .select()
     .from(dmAccess)
-    .where(eq(dmAccess.paymentId, payment_id))
+    .where(eq(dmAccess.paymentId, metadata.payment_id))
 
   if (existingAccess[0]) {
-    console.log('DM access already exists for payment:', payment_id)
+    console.log('DM access already exists for payment:', metadata.payment_id)
     return
   }
 

@@ -275,6 +275,7 @@ function ChatPage() {
   displayItems.sort(
     (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
   )
+console.log({hasAccess,isOwner});
 
   // Payment required - show payment options
   if (!hasAccess && !isOwner) {

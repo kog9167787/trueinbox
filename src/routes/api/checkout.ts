@@ -4,8 +4,13 @@ import { db } from '#/db'
 import { user, userPaymentSettings, payment, dmAccess } from '#/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { env } from '#/lib/env'
+import { nanoid } from '#/lib/nanoid'
+import DodoPayments from 'dodopayments'
 
-// DodoPayments API configuration
+const dodo = new DodoPayments({
+  bearerToken: env.DODO_API_KEY,
+  baseURL: env.DODO_API_BASE, // optional if you use default
+})
 
 export const Route = createFileRoute('/api/checkout')({
   server: {
@@ -22,7 +27,7 @@ export const Route = createFileRoute('/api/checkout')({
         }: {
           creatorId: string
           type: 'paywall' | 'guaranteed'
-          upgradeFromAccessId?: string // If upgrading from paywall to guaranteed
+          upgradeFromAccessId?: string
         } = await request.json()
 
         if (!creatorId || !type) {
@@ -32,7 +37,6 @@ export const Route = createFileRoute('/api/checkout')({
           )
         }
 
-        // Can't pay yourself
         if (creatorId === myId) {
           return Response.json(
             { message: 'You cannot pay yourself' },
@@ -40,7 +44,6 @@ export const Route = createFileRoute('/api/checkout')({
           )
         }
 
-        // Fetch creator
         const creatorResult = await db
           .select()
           .from(user)
@@ -53,7 +56,6 @@ export const Route = createFileRoute('/api/checkout')({
           )
         }
 
-        // Fetch creator's payment settings
         const paymentSettingsResult = await db
           .select()
           .from(userPaymentSettings)
@@ -61,7 +63,6 @@ export const Route = createFileRoute('/api/checkout')({
         const paymentSettings = paymentSettingsResult[0]
         console.log({ paymentSettings })
 
-        // Determine price (stored in dollars, convert to cents for payment)
         let priceInDollars =
           type === 'guaranteed'
             ? (creator.guaranteedReplyPrice ?? 0)
@@ -71,7 +72,6 @@ export const Route = createFileRoute('/api/checkout')({
         let existingAccessId: string | null = null
         let previousAmountPaid = 0
 
-        // Handle upgrade from paywall to guaranteed
         if (upgradeFromAccessId && type === 'guaranteed') {
           const existingAccess = await db
             .select()
@@ -89,11 +89,9 @@ export const Route = createFileRoute('/api/checkout')({
           if (existingAccess[0]) {
             isUpgrade = true
             existingAccessId = existingAccess[0].id
-            // Amount already paid (in cents), convert to dollars for calculation
             previousAmountPaid = existingAccess[0].amountPaid
             const previousAmountInDollars = previousAmountPaid / 100
 
-            // Calculate the difference
             const guaranteedPrice = creator.guaranteedReplyPrice ?? 0
             priceInDollars = Math.max(
               0,
@@ -101,8 +99,6 @@ export const Route = createFileRoute('/api/checkout')({
             )
 
             if (priceInDollars <= 0) {
-              // Already paid enough, just upgrade directly
-              // This shouldn't happen normally but handle edge case
               return Response.json(
                 {
                   message:
@@ -127,59 +123,37 @@ export const Route = createFileRoute('/api/checkout')({
         }
 
         const priceInCents = Math.round(priceInDollars * 100)
-        let paymentId = null
-        const metadata: Record<string, any> = {
+        const paymentId = nanoid()
+
+        const metadata: Record<string, string> = {
+          payment_id: paymentId,
           sender_id: myId,
           receiver_id: creatorId,
           type,
         }
         if (isUpgrade) metadata.is_upgrade = String(isUpgrade)
         if (existingAccessId) metadata.upgrade_from_access_id = existingAccessId
-        if (previousAmountPaid) metadata.previous_amount_paid = String(previousAmountPaid)
-        
+        if (previousAmountPaid)
+          metadata.previous_amount_paid = String(previousAmountPaid)
+
         try {
-          const checkoutResponse = await fetch(
-            `${env.DODO_API_BASE}/payments`,
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${env.DODO_API_KEY}`,
+          const checkoutData = await dodo.checkoutSessions.create({
+            product_cart: [
+              {
+                product_id: env.DODO_PRODUCT_ID,
+                quantity: 1,
+                amount: priceInCents,
               },
-              body: JSON.stringify({
-                billing: {
-                  currency: 'USD',
-                  country: 'US',
-                },
-                customer: {
-                  email: session.user.email,
-                  name: session.user.name || 'Inboxly User',
-                },
-                product_cart: [
-                  {
-                    product_id: env.DODO_PRODUCT_ID,
-                    quantity: 1,
-                    amount: priceInCents,
-                  },
-                ],
-                payment_link: true,
-                return_url: `${env.BASE_URL}/inbox/${creator.username}`,
-                metadata,
-              }),
+            ],
+              discount_codes: ['ABC09'],
+            customer: {
+              email: session.user.email,
+              name: session.user.name || 'Inboxly User',
             },
-          )
-          const checkoutData = await checkoutResponse.json()
-          paymentId = (checkoutData?.payment_id as string) || null
-          if (!paymentId) {
-            console.error(
-              'DodoPayments error: No payment ID returned',
-              checkoutData,
-            )
-            return Response.json(
-              { message: 'Failed to create checkout session' },
-              { status: 500 },
-            )
-          }
+            return_url: `${env.BASE_URL}/inbox/${creator.username}`,
+            metadata,
+          })
+
           await db.insert(payment).values({
             id: paymentId,
             senderId: myId,
@@ -189,39 +163,14 @@ export const Route = createFileRoute('/api/checkout')({
             type: isUpgrade ? 'guaranteed' : type,
             status: 'pending',
             provider: 'dodo',
+            providerCheckoutId: checkoutData.session_id,
+            providerCheckoutUrl: checkoutData.checkout_url ?? null,
             createdAt: new Date(),
             updatedAt: new Date(),
           })
-          if (!checkoutResponse.ok) {
-            console.error('DodoPayments error:', checkoutData, checkoutResponse)
-            console.log();
-
-            // Mark payment as failed
-            await db
-              .update(payment)
-              .set({ status: 'failed', updatedAt: new Date() })
-              .where(eq(payment.id, paymentId))
-
-            return Response.json(
-              { message: 'Failed to create checkout session' },
-              { status: 500 },
-            )
-          }
-
-          // Update payment record with provider references
-          await db
-            .update(payment)
-            .set({
-              providerPaymentId: checkoutData.payment_id,
-              providerCheckoutUrl: checkoutData.payment_link,
-              providerCheckoutId: checkoutData.id,
-              status: 'processing',
-              updatedAt: new Date(),
-            })
-            .where(eq(payment.id, paymentId))
 
           return Response.json({
-            checkoutUrl: checkoutData.payment_link,
+            checkoutUrl: checkoutData.checkout_url,
             paymentId,
             isUpgrade,
             amountToPay: priceInDollars,

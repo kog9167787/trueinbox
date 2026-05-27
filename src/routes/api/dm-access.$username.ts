@@ -34,7 +34,6 @@ export const Route = createFileRoute('/api/dm-access/$username')({
             },
           })
         }
-        console.log(myId,user2.id);
         
         const paymentRecordQuery = await db
           .select({
