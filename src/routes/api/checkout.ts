@@ -145,7 +145,6 @@ export const Route = createFileRoute('/api/checkout')({
                 amount: priceInCents,
               },
             ],
-              discount_codes: ['ABC09'],
             customer: {
               email: session.user.email,
               name: session.user.name || 'Inboxly User',
