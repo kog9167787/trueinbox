@@ -21,37 +21,44 @@ export const Route = createFileRoute('/api/webhook')({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        // Get raw body for signature verification
-        const payload = await request.text()
-        const webhook = new Webhook(WEBHOOK_SECRET)
-        const headers = Object.fromEntries(request.headers.entries())
+        try {
 
-        const event = (await webhook.verify(payload, headers)) as any
-        console.log(JSON.stringify({ payload, event }))
+          // Get raw body for signature verification
+          const payload = await request.text()
+          const webhook = new Webhook(WEBHOOK_SECRET)
+          const headers = Object.fromEntries(request.headers.entries())
 
-        console.log('Webhook event received:', event.type)
+          const event = (await webhook.verify(payload, headers)) as any
+          console.log(JSON.stringify({ payload, event }))
 
-        switch (event.type) {
-          case 'payment.succeeded': {
-            await handlePaymentSucceeded(event.data)
-            break
+          console.log('Webhook event received:', event.type)
+
+          switch (event.type) {
+            case 'payment.succeeded': {
+              await handlePaymentSucceeded(event.data)
+              break
+            }
+
+            case 'payment.failed': {
+              await handlePaymentFailed(event.data)
+              break
+            }
+
+            case 'refund.succeeded': {
+              await handleRefundSucceeded(event.data)
+              break
+            }
+
+            default:
+              console.log('Unhandled webhook event:', event.type)
           }
 
-          case 'payment.failed': {
-            await handlePaymentFailed(event.data)
-            break
-          }
+          return new Response('OK', { status: 200 })
+        } catch (error) {
+          console.log("Webhook err", error);
+          return new Response('Error', { status: 500 })
 
-          case 'refund.succeeded': {
-            await handleRefundSucceeded(event.data)
-            break
-          }
-
-          default:
-            console.log('Unhandled webhook event:', event.type)
         }
-
-        return new Response('OK', { status: 200 })
       },
     },
   },
