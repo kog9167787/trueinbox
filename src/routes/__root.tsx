@@ -18,7 +18,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
     meta: [
       ...seo({
-        title: 'Inboxly',
+        title: 'Inboxly - Connect with your insirations in dm',
         description:
           'Inboxly keeps messages from close friends, real sponsors, and people who matter always within reach — no fan floods, no bots.',
         keywords:
