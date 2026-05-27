@@ -14,15 +14,17 @@ interface MyRouterContext {
   queryClient: QueryClient
 }
 
-
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
     meta: [
       ...seo({
-        title:
-          "Inboxly",
-        image: `https://www.inboxly.live/og-image.png`,
-        url: "https://www.inboxly.live",
+        title: 'Inboxly',
+        description:
+          'Inboxly keeps messages from close friends, real sponsors, and people who matter always within reach — no fan floods, no bots.',
+        keywords:
+          'creator inbox, sponsor DMs, paid messages, influencer monetization, inbox management, creator economy',
+        image: 'https://www.inboxly.live/og-image.png',
+        url: 'https://www.inboxly.live',
       }),
       {
         charSet: 'utf-8',
