@@ -10,60 +10,55 @@ import {
 import { eq, and, sql } from 'drizzle-orm'
 import { nanoid } from '#/lib/nanoid'
 import { env } from '#/lib/env'
-import { Webhook } from 'standardwebhooks'
-
-const WEBHOOK_SECRET = env.DODO_PAYMENTS_WEBHOOK_KEY
 
 // Platform fee percentage (e.g., 10% = 0.10)
 const PLATFORM_FEE_PERCENT = 0.1
+import DodoPayments from 'dodopayments'
+
+const client = new DodoPayments({
+  bearerToken: env.DODO_API_KEY,
+  environment: env.DODO_API_BASE.includes('live') ? 'live_mode' : 'test_mode', // 'test' | 'live'
+  webhookKey: env.DODO_PAYMENTS_WEBHOOK_KEY,
+})
 
 export const Route = createFileRoute('/api/webhook')({
   server: {
     handlers: {
       POST: async ({ request }) => {
         try {
-
-          // Get raw body for signature verification
           const payload = await request.text()
-          const webhook = new Webhook(WEBHOOK_SECRET)
-          const headers = Object.fromEntries(request.headers.entries())
 
-          const event = (await webhook.verify(payload, headers)) as any
-          console.log(JSON.stringify({ payload, event }))
-
-          console.log('Webhook event received:', event.type)
+          const event = client.webhooks.unwrap(payload, {
+            headers: {
+              'webhook-id': request.headers.get('webhook-id') || '',
+              'webhook-signature': request.headers.get('webhook-signature') || '',
+              'webhook-timestamp': request.headers.get('webhook-timestamp') || '',
+            },
+          })
 
           switch (event.type) {
-            case 'payment.succeeded': {
+            case 'payment.succeeded':
               await handlePaymentSucceeded(event.data)
               break
-            }
-
-            case 'payment.failed': {
+            case 'payment.failed':
               await handlePaymentFailed(event.data)
               break
-            }
-
-            case 'refund.succeeded': {
+            case 'refund.succeeded':
               await handleRefundSucceeded(event.data)
               break
-            }
-
             default:
               console.log('Unhandled webhook event:', event.type)
           }
 
           return new Response('OK', { status: 200 })
         } catch (error) {
-          console.log("Webhook err", error);
-          return new Response('Error', { status: 500 })
-
+          console.error('Webhook verification failed:', error)
+          return new Response('Invalid signature', { status: 401 })
         }
       },
     },
   },
 })
-
 async function handlePaymentSucceeded(data: any) {
   const { payment_id, metadata } = data
 
