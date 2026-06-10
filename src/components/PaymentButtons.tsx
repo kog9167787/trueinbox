@@ -51,7 +51,7 @@ export function PaymentButtons({
       {hasGuaranteed && (
         <button
           onClick={onGuaranteed}
-          className={`flex items-center justify-between px-4 py-3 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-xl hover:from-emerald-700 hover:to-emerald-600 active:scale-[0.99] transition-all text-left shadow-lg shadow-emerald-600/20 ${layout === 'horizontal' ? 'flex-1' : 'w-full'}`}
+          className={`font-semibold text-center   px-4 py-3 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-xl hover:from-emerald-700 hover:to-emerald-600 active:scale-[0.99] transition-all shadow-lg shadow-emerald-600/20 ${layout === 'horizontal' ? 'flex-1' : 'w-full'}`}
         >
           Shoot a DM 
         </button>
