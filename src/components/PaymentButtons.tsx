@@ -30,7 +30,7 @@ export function PaymentButtons({
   return (
     <div className={`${containerClass} ${className}`}>
       {/* DM Button */}
-      {hasPaywall && (
+      {/* {hasPaywall && (
         <button
           onClick={onPaywall}
           className={`flex items-center justify-between px-4 py-3 bg-emerald-100 border border-emerald-400 hover:bg-emerald-200 rounded-xl transition text-left ${layout === 'horizontal' ? 'flex-1' : 'w-full'}`}
@@ -45,7 +45,7 @@ export function PaymentButtons({
             ${dmPrice}
           </span>
         </button>
-      )}
+      )} */}
 
       {/* Guaranteed Reply Button - Premium styling */}
       {hasGuaranteed && (
@@ -53,21 +53,7 @@ export function PaymentButtons({
           onClick={onGuaranteed}
           className={`flex items-center justify-between px-4 py-3 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-xl hover:from-emerald-700 hover:to-emerald-600 active:scale-[0.99] transition-all text-left shadow-lg shadow-emerald-600/20 ${layout === 'horizontal' ? 'flex-1' : 'w-full'}`}
         >
-          <span className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-white" />
-            </div>
-            <div>
-              <p className="text-sm font-medium flex items-center gap-1.5">
-                Guaranteed Reply
-                <BadgeCheck className="w-3.5 h-3.5" />
-              </p>
-              <p className="text-[10px] text-emerald-100">
-                Genuine conversation or your money back
-              </p>
-            </div>
-          </span>
-          <span className="text-base font-medium">${guaranteedReplyPrice}</span>
+          Shoot a DM 
         </button>
       )}
 
