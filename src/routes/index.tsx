@@ -1338,6 +1338,16 @@ function TrueInboxLanding() {
           <a href="#">Blog</a>
           <a href="#">Twitter</a>
         </div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+          <a href="https://www.scrolllaunch.com/products/inboxly?ref=badge" target="_blank" rel="noopener">
+            <img
+              src="https://www.scrolllaunch.com/api/badge/inboxly?variant=launched&theme=light"
+              alt="Inboxly — Featured on ScrollLaunch"
+              width="220"
+              height="48"
+            />
+          </a>
+        </div>
         <div className="footer-copy">© 2025 Inboxly. Built for creators.</div>
       </footer>
     </>
